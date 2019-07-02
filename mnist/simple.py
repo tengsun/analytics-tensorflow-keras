@@ -9,10 +9,11 @@ np.random.seed(1671)
 
 
 # network and training
-NUM_EPOCH = 200
+NUM_EPOCH = 20
 BATCH_SIZE = 128
 VERBOSE = 1
 NUM_CLASSES = 10
+NUM_HIDDEN = 128
 OPTIMIZER = SGD()
 NUM_HIDDEN = 128
 VALIDATION_SPLIT = 0.2
@@ -41,7 +42,11 @@ Y_test = np_utils.to_categorical(Y_test, NUM_CLASSES)
 
 # final stage is softmax
 model = Sequential()
-model.add(Dense(NUM_CLASSES, input_shape=(RESHAPED,)))
+model.add(Dense(NUM_HIDDEN, input_shape=(RESHAPED,)))
+model.add(Activation('relu'))
+model.add(Dense(NUM_HIDDEN))
+model.add(Activation('relu'))
+model.add(Dense(NUM_CLASSES))
 model.add(Activation('softmax'))
 model.summary()
 
