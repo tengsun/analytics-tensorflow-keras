@@ -2,8 +2,8 @@ from __future__ import print_function
 import numpy as np
 from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers.core import Dense, Activation
-from keras.optimizers import SGD
+from keras.layers.core import Dense, Dropout, Activation
+from keras.optimizers import SGD, RMSprop, Adam
 from keras.utils import np_utils
 np.random.seed(1671)
 
@@ -14,9 +14,10 @@ BATCH_SIZE = 128
 VERBOSE = 1
 NUM_CLASSES = 10
 NUM_HIDDEN = 128
-OPTIMIZER = SGD()
+OPTIMIZER = Adam() # SGD, RMSprop
 NUM_HIDDEN = 128
 VALIDATION_SPLIT = 0.2
+DROPOUT = 0.3
 RESHAPED = 784
 
 # shuffled and split between train and test
@@ -44,8 +45,10 @@ Y_test = np_utils.to_categorical(Y_test, NUM_CLASSES)
 model = Sequential()
 model.add(Dense(NUM_HIDDEN, input_shape=(RESHAPED,)))
 model.add(Activation('relu'))
+model.add(Dropout(DROPOUT))
 model.add(Dense(NUM_HIDDEN))
 model.add(Activation('relu'))
+model.add(Dropout(DROPOUT))
 model.add(Dense(NUM_CLASSES))
 model.add(Activation('softmax'))
 model.summary()
