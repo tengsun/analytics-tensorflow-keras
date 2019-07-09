@@ -37,6 +37,7 @@ class LeNet:
 import numpy as np
 from keras.datasets import mnist
 from keras.utils import np_utils
+import matplotlib.pyplot as plt
 
 
 # network and training
@@ -83,4 +84,22 @@ history = model.fit(X_train, Y_train, batch_size=BATCH_SIZE,
 score = model.evaluate(X_test, Y_test, verbose=VERBOSE)
 print('test score:', score[0])
 print('test accuracy:', score[1])
+
+# summarize history of accuracy and loss
 print(history.history.keys())
+
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'validation'], loc='upper left')
+plt.show()
+
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'validation'], loc='upper left')
+plt.show()
