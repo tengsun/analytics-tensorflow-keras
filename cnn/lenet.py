@@ -51,11 +51,11 @@ IMG_ROWS, IMG_COLS = 28, 28
 INPUT_SHAPE = (IMG_ROWS, IMG_COLS, 1)
 
 # shuffled and split between train and test
-# (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-f = np.load('/Users/tengsun/.keras/datasets/mnist.npz')
-X_train, Y_train = f['x_train'], f['y_train']
-X_test, Y_test = f['x_test'], f['y_test']
-f.close()
+(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+# f = np.load('/Users/tengsun/.keras/datasets/mnist.npz')
+# X_train, Y_train = f['x_train'], f['y_train']
+# X_test, Y_test = f['x_test'], f['y_test']
+# f.close()
 
 # normalize the pixel data to [0, 1] by /255
 X_train = X_train.astype('float32')
